@@ -11,8 +11,11 @@ var Stack = function() {
     if(Object.keys(storage).length === 0){
       storage[0] = value;
     } else {
+      // Otherwise, the object is not empty, so gather all current keys:
+      var currentKeys = Object.keys(storage);
+
       // If storage is not empty, find the value of the last key:
-      var lastKey = Object.keys(storage)[storage.length - 1];
+      var lastKey = currentKeys[currentKeys.length - 1];
 
       // Identify the next available number to be used as a key:
       var nextAvailable = parseInt(lastKey) + 1;
@@ -21,8 +24,8 @@ var Stack = function() {
       // the combination of 'nextAvailable' and the passed in value: 
       storage[nextAvailable] = value;
 
-      // Return the new size of the storage object:
-      return Object.keys(storage);
+      // Return the number of keys within the updated object:
+      return Object.keys(storage).length;
     }
 
   };
@@ -32,14 +35,17 @@ var Stack = function() {
     if(Object.keys(storage).length === 0){
       return 0;
     } else {
-    // Delete the last element within the storage object via its keys:
-    // BUG!!!!!! Not deleting the key\value for some reason. Logic is off
-    var currentKeys = Object.keys(storage);
-    delete storage[currentKeys[currentKeys.length - 1]];
+      // Otherwise, the object is not empty, so gather all current keys:
+      var currentKeys = Object.keys(storage);
 
-    // Return the new length of the storage object via the number of keys it 
-    // contains:
-    return Object.keys(storage).length;
+      // Store the last key in the object in order to return it later:
+      var itemRemoved = storage[currentKeys[currentKeys.length - 1]];
+
+      // Delete the last element within the storage object:
+      delete storage[currentKeys[currentKeys.length - 1]];
+
+      // Return the new length of the storage object via the number of keys it contains:
+      return itemRemoved;
     }
   };
 
