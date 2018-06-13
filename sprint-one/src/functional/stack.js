@@ -28,7 +28,12 @@ var Stack = function() {
   };
 
   someInstance.pop = function() {
+    // Delete the last element within the storage object via its keys:
+    delete storage[storage.length - 1];
 
+    // Return the new length of the storage object via the number of keys it 
+    // contains:
+    return Object.keys(storage).length;
   };
 
   someInstance.size = function() {
