@@ -28,12 +28,19 @@ var Stack = function() {
   };
 
   someInstance.pop = function() {
+    // If the object is empty and you try to remove an element, return 0:
+    if(Object.keys(storage).length === 0){
+      return 0;
+    } else {
     // Delete the last element within the storage object via its keys:
-    delete storage[storage.length - 1];
+    // BUG!!!!!! Not deleting the key\value for some reason. Logic is off
+    var currentKeys = Object.keys(storage);
+    delete storage[currentKeys[currentKeys.length - 1]];
 
     // Return the new length of the storage object via the number of keys it 
     // contains:
     return Object.keys(storage).length;
+    }
   };
 
   someInstance.size = function() {
