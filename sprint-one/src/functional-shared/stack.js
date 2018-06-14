@@ -1,7 +1,7 @@
 var Stack = function() {
 
   var newStack = {};
-  
+
   // Identify element count in object:
   newStack.elementCount = Object.keys(newStack).length;
 
@@ -38,6 +38,7 @@ var stackMethods = {
     } else {
       this[this.nextAvailable] = value;
       this.elementCount++;
+      this.nextAvailable++;
       return this.elementCount;
     }
   },
